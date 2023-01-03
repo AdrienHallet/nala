@@ -8,6 +8,12 @@ import type { Provider } from "@auth/core/providers"
  */
 export const handle = SvelteKitAuth({
     providers: [
-        GitHub({ clientId: GITHUB_ID, clientSecret: GITHUB_SECRET }) as Provider
+        GitHub({
+            clientId: GITHUB_ID, clientSecret: GITHUB_SECRET, authorization: {
+                params: {
+                    scope: 'repo read:user user:email'
+                }
+            }
+        }) as Provider
     ],
 })
