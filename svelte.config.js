@@ -10,10 +10,10 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		alias: {
-			'$core': 'src/core'
+			$core: 'src/core',
+			$ui: 'src/ui'
 		}
 	}
-
 };
 
 export default config;
