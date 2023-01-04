@@ -32,17 +32,17 @@
 		<span
 			on:click={toggleMenu}
 			on:keypress={toggleMenu}
-			class="absolute transition-all duration-500 {collapse ? 'sm:right-6' : 'sm:right-0'}"
+			class="absolute left-6 transition-all duration-500 sm:left-auto sm:right-6"
 		>
 			<Hamburger classes="h-6" bind:collapsed={collapse} />
 		</span>
 	</div>
 </div>
-<div class="flex h-full w-full flex-col sm:flex-row">
+<div class="flex h-full w-full flex-grow flex-row">
 	<div
 		id="Main"
-		class="h-full w-full transform flex-col items-start justify-start bg-zinc-900 transition-width duration-500 ease-in-out sm:w-64 xl:translate-x-0 xl:rounded-r {collapse
-			? 'hidden sm:flex sm:w-16'
+		class="absolute h-[calc(100%-4rem)] w-full transform items-start justify-start bg-zinc-900 transition-all duration-500 ease-in-out xl:translate-x-0 xl:rounded-r {collapse
+			? '-translate-x-full sm:flex sm:w-16 sm:translate-x-0'
 			: 'sm:w-64'} "
 	>
 		<div
