@@ -3,6 +3,10 @@ module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
+			transitionProperty: {
+				width: 'width',
+        collapse: 'collapse'
+			},
 			keyframes: {
 				pingpong: {
 					'0%': { transform: 'translate(0%)' },
