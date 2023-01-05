@@ -32,7 +32,9 @@
 		<span
 			on:click={toggleMenu}
 			on:keypress={toggleMenu}
-			class="absolute transition-all duration-500 {collapse ? 'right-5' : 'right-1'}"
+			class="absolute left-5 transition-all duration-500 sm:left-auto {collapse
+				? 'sm:right-5'
+				: 'sm:right-1'}"
 		>
 			<Hamburger classes="w-6" bind:collapsed={collapse} />
 		</span>
