@@ -3,7 +3,7 @@
 </script>
 
 <button
-	class="jusitfy-start right-6 flex w-full items-center space-x-11 rounded text-white focus:text-indigo-400 focus:outline-none "
+	class="jusitfy-start flex w-full items-center space-x-11 rounded text-white focus:text-indigo-400 focus:outline-none "
 >
 	<slot name="icon" />
 	<p

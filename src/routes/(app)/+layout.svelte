@@ -32,9 +32,9 @@
 		<span
 			on:click={toggleMenu}
 			on:keypress={toggleMenu}
-			class="absolute left-6 transition-all duration-500 sm:left-auto sm:right-6"
+			class="absolute transition-all duration-500 {collapse ? 'right-5' : 'right-1'}"
 		>
-			<Hamburger classes="h-6" bind:collapsed={collapse} />
+			<Hamburger classes="w-6" bind:collapsed={collapse} />
 		</span>
 	</div>
 </div>
@@ -45,17 +45,16 @@
 			? '-translate-x-full sm:flex sm:w-16 sm:translate-x-0'
 			: 'sm:w-64'} "
 	>
-		<div
-			class="mt-6 flex w-full flex-col items-center justify-start space-y-3 border-b border-gray-600 pl-4 pb-5 "
-		>
+		<div class="mt-6 flex w-full flex-col items-center justify-start space-y-3 pl-5 pb-5">
 			<SidbarItem bind:collapse>
-				<Dashboard classes="h-6 absolute" slot="icon" />
+				<Dashboard classes="w-6 absolute" slot="icon" />
 				Dashboard
 			</SidbarItem>
 			<SidbarItem bind:collapse>
-				<Dashboard classes="h-6 absolute" slot="icon" />
+				<Dashboard classes="w-6 absolute" slot="icon" />
 				Dashboard
 			</SidbarItem>
+			<hr class="mr-4 h-px w-full border-zinc-400" />
 		</div>
 	</div>
 	<div class="flex h-full w-full">
