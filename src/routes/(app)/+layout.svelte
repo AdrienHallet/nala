@@ -4,40 +4,44 @@
 	import Logo from '$ui/icons/logo.svelte';
 	import SidbarItem from '$ui/specifics/layout/sidbar-item.svelte';
 
-	let collapse = false;
+	let collapse = true;
 
 	const toggleMenu = () => {
 		collapse = !collapse;
 	};
 </script>
 
-<div class="z-50 flex h-16 w-full items-center justify-between bg-zinc-900">
+<div class="z-50 flex h-16 w-full items-center bg-zinc-900 text-zinc-300">
 	<div
-		class="relative flex items-center text-zinc-300 transition-width duration-500 {collapse
+		class="relative flex h-full items-center transition-width duration-500 {collapse
 			? 'sm:w-16'
 			: 'sm:w-64'} "
 	>
-		<span class="hidden items-center sm:flex">
-			<Logo
-				classes="h-6 transition-all duration-100 delay-150 ease-in pl-3 {collapse
-					? 'opacity-0'
-					: ''}"
-			/>
-			<span
-				class="pl-3 text-2xl transition-all delay-150 duration-100 ease-in {collapse
-					? 'opacity-0'
-					: ''}">NALAssistant</span
-			>
+		<span
+			class="hidden items-center transition-opacity delay-150 duration-100 ease-in sm:flex {collapse
+				? 'opacity-0'
+				: ''}"
+		>
+			<Logo classes="h-6 pl-3 " />
+			<span class="pl-3 text-2xl">NALAssistant</span>
 		</span>
 		<span
 			on:click={toggleMenu}
 			on:keypress={toggleMenu}
-			class="absolute left-5 transition-all duration-500 sm:left-auto {collapse
+			class="absolute left-5 z-50 transition-all duration-500 sm:left-auto {collapse
 				? 'sm:right-5'
 				: 'sm:right-1'}"
 		>
 			<Hamburger classes="w-6" bind:collapsed={collapse} />
 		</span>
+	</div>
+	<div
+		class="flex flex-grow items-center justify-center justify-items-center transition-opacity duration-100 ease-in sm:left-16 sm:flex-none {collapse
+			? 'sm:delay-200'
+			: 'sm:hidden sm:opacity-0'}"
+	>
+		<Logo classes="h-6" />
+		<span class="hidden pl-3 text-2xl sm:block">NALAssistant</span>
 	</div>
 </div>
 <div class="z-0 flex w-full flex-grow flex-row overflow-auto overflow-x-hidden">
