@@ -28,7 +28,7 @@
 		<span
 			on:click={toggleMenu}
 			on:keypress={toggleMenu}
-			class="absolute left-5 z-50 transition-all duration-500 sm:left-auto {collapse
+			class="transition- absolute left-5 z-50 cursor-pointer duration-500 hover:text-zinc-600 hover:transition-none sm:left-auto {collapse
 				? 'sm:right-5'
 				: 'sm:right-1'}"
 		>
@@ -51,72 +51,14 @@
 			? '-translate-x-full sm:flex sm:w-16 sm:translate-x-0'
 			: 'sm:w-64'} "
 	>
-		<div class="mt-6 flex w-full flex-col items-center justify-start space-y-3 pl-5 pb-5">
+		<div class="flex h-full w-full grow flex-col items-center justify-start space-y-3 p-5 ">
 			<SidbarItem bind:collapse>
 				<Dashboard classes="w-6 absolute" slot="icon" />
 				Dashboard
 			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<SidbarItem bind:collapse>
-				<Dashboard classes="w-6 absolute" slot="icon" />
-				Yet Another Item
-			</SidbarItem>
-			<hr class="mr-4 h-px w-full border-zinc-400" />
+			<div class="flex w-full flex-col items-center">
+				<hr class="flex h-px w-full border-zinc-400" />
+			</div>
 		</div>
 	</div>
 	<div class="">
