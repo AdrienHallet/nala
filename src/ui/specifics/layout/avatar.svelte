@@ -2,6 +2,7 @@
 	import { signOut } from '@auth/sveltekit/client';
 	import ChevronDown from '$ui/icons/chevron-down.svelte';
 	import { slide } from 'svelte/transition';
+	import LogOut from '$ui/icons/log-out.svelte';
 
 	export let username: string;
 	export let avatarUrl: string;
@@ -62,7 +63,8 @@
 					on:keydown={signOut}
 					class="flex h-8 cursor-pointer pl-3 hover:border-0 hover:bg-zinc-800"
 				>
-					<span class="my-auto">Log Out</span>
+					<LogOut classes="h-4 my-auto" />
+					<span class="my-auto pl-4">Log Out</span>
 				</li>
 			</ul>
 			<hr class="border-zinc-500 pb-2" />
