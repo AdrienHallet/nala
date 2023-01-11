@@ -7,13 +7,37 @@
 	export let avatarUrl: string;
 
 	let isExpanded = false;
+	let component: Node;
 
 	function toggleMenu() {
 		isExpanded = !isExpanded;
+		if (isExpanded) {
+			document.addEventListener('click', handleOutsideEventClick, true);
+			document.addEventListener('keyup', handleOutsideEventKey, true);
+		} else {
+			document.removeEventListener('click', handleOutsideEventClick, true);
+			document.removeEventListener('keyup', handleOutsideEventKey, true);
+		}
+	}
+
+	function handleOutsideEventClick(event: any) {
+		if (component.contains(event.target)) {
+			return;
+		}
+		// Toggle whenever there is a click outside the component
+		toggleMenu();
+	}
+
+	function handleOutsideEventKey(event: any) {
+		if (event.key != 'Escape') {
+			return;
+		}
+		// Only toggle when Escape key is used
+		toggleMenu();
 	}
 </script>
 
-<div class="relative">
+<div bind:this={component} class="relative">
 	<div
 		class="relative flex cursor-pointer rounded-full border border-zinc-600 bg-zinc-700 p-1 hover:bg-zinc-800 {isExpanded
 			? 'sm:rounded-b-none sm:rounded-t-2xl'
