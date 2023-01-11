@@ -1,14 +1,19 @@
-<script>
+<script lang="ts">
 	import Dashboard from '$ui/icons/dashboard.svelte';
 	import Hamburger from '$ui/icons/hamburger.svelte';
 	import Logo from '$ui/icons/logo.svelte';
+	import Avatar from '$ui/specifics/layout/avatar.svelte';
 	import SidbarItem from '$ui/specifics/layout/sidbar-item.svelte';
+	import { page } from '$app/stores';
 
 	let collapse = true;
 
 	const toggleMenu = () => {
 		collapse = !collapse;
 	};
+
+	let username: string = $page?.data?.session?.user?.name as string;
+	let avatarUrl: string = $page?.data?.session?.user?.image as string;
 </script>
 
 <div class="z-50 flex h-16 w-full items-center bg-zinc-900 text-zinc-300">
@@ -43,6 +48,7 @@
 		<Logo classes="h-6" />
 		<span class="hidden pl-3 text-2xl sm:block">NALAssistant</span>
 	</div>
+	<div class="absolute right-0 flex pr-4"><Avatar {username} {avatarUrl} /></div>
 </div>
 <div class="z-0 flex w-full flex-grow flex-row overflow-auto overflow-x-hidden">
 	<div
