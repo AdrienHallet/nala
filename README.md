@@ -1,8 +1,8 @@
-# Nalassistant
+# Nala
 
 [![License][license-badge]][license]
 
-Nalassistant is a personal assistant web application that uses the [SvelteKit](https://kit.svelte.dev/) framework.
+Nala (Network Attached Little Assistant) is a personal assistant web application that uses the [SvelteKit](https://kit.svelte.dev/) framework.
 
 ## Features
 
@@ -29,7 +29,7 @@ yarn dev
 <!-- Hyperlinks -->
 
 [license]: ./LICENSE
-[license-badge]: https://img.shields.io/github/license/AdrienHallet/nalassistant?style=flat-square
+[license-badge]: https://img.shields.io/github/license/AdrienHallet/nala?style=flat-square
 [convcom-badge]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg?style=flat-square
 [convcom-ref]: https://conventionalcommits.org
 [semver-badge]: https://img.shields.io/badge/Semantic%20Versioning-2.0.0-green.svg?style=flat-square

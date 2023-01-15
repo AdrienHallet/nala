@@ -28,7 +28,7 @@
 				: ''}"
 		>
 			<Logo classes="h-6 pl-3 " />
-			<span class="pl-3 text-2xl">NALAssistant</span>
+			<span class="pl-3 text-2xl">NALA</span>
 		</span>
 		<span
 			on:click={toggleMenu}
@@ -46,7 +46,7 @@
 			: 'sm:hidden sm:opacity-0'}"
 	>
 		<Logo classes="h-6" />
-		<span class="hidden pl-3 text-2xl sm:block">NALAssistant</span>
+		<span class="hidden pl-3 text-2xl sm:block">NALA</span>
 	</div>
 	<div class="absolute right-0 flex pr-4"><Avatar {username} {avatarUrl} /></div>
 </div>
