@@ -1,19 +1,21 @@
 // GitHub API v3
 
 import { configuration, type Configuration } from "$core/configuration/state";
-import type { GithubRepository } from "$core/model/github-repository";
 import { Optional } from "$core/model/optional";
 import { get } from "svelte/store";
 
 const baseURL = 'https://api.github.com';
 let config: Optional<Configuration> = Optional.empty();
 
-/**
- * Returns the contents of a GitHub repository.
- */
-export async function getRepository(repositoryName: string): Promise<GithubRepository> {
-    const response = await gitFetch(`${baseURL}/${config.get().user.name}/${repositoryName}`)
-    return response.json() as Promise<GithubRepository>
+export async function getContent(user: string, repository: string): Promise<unknown> {
+    const response = await gitFetch(`${baseURL}/repos/${user}/${repository}/contents/`, {
+        cache: "no-store",
+    });
+    return response.json();
+}
+
+export async function getBlob(url: string): Promise<unknown> {
+    return await (await gitFetch(url)).json();
 }
 
 async function gitFetch(url: RequestInfo, options?: RequestInit) {
@@ -35,6 +37,8 @@ async function gitFetch(url: RequestInfo, options?: RequestInit) {
 function setToken() {
     // Acceptable because the properties are extremely static
     config = Optional.of(get(configuration))
+    console.log('conf:');
+    console.log(config)
     if (config.get() == null) {
         throw new Error("Cannot contact GitHub API without configuration");
     }

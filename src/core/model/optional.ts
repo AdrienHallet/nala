@@ -17,6 +17,6 @@ export class Optional<T> {
     }
 
     public isPresent(): boolean {
-        return this.value == null;
+        return this.value != null;
     }
 }

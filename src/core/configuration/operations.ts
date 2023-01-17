@@ -1,3 +1,4 @@
+import type { ISessionToken } from "$core/model/session-token";
 import { env } from "$env/dynamic/public";
 import { configuration } from "./state";
 
@@ -9,7 +10,7 @@ export function initialize(data: App.PageData & Record<string, string>) {
         },
         github: {
             repository: env.PUBLIC_REPOSITORY_NAME,
-            accessToken: data?.accessToken as string,
+            accessToken: (data?.session as ISessionToken)?.accessToken as string,
         },
         ui: {
             menuCollapsed: localStorage.getItem('menuCollapsed') === 'true',
