@@ -1,3 +1,4 @@
+import type { GithubConfiguration } from "$core/model/github-configuration";
 import type { User } from "$core/model/user";
 import { writable, type Writable } from "svelte/store";
 
@@ -8,7 +9,7 @@ export const configuration: Writable<Configuration> = writable();
  */
 export interface Configuration {
     user: User;
-    accessToken: string; // GitHub access token
+    github: GithubConfiguration;
     ui: {
         menuCollapsed: boolean;
     }

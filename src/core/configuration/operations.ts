@@ -1,3 +1,4 @@
+import { env } from "$env/dynamic/public";
 import { configuration } from "./state";
 
 export function initialize(data: App.PageData & Record<string, string>) {
@@ -6,7 +7,10 @@ export function initialize(data: App.PageData & Record<string, string>) {
             name: data?.session?.user?.name as string,
             avatarUrl: data?.session?.user?.image as string,
         },
-        accessToken: data?.accessToken as string,
+        github: {
+            repository: env.PUBLIC_REPOSITORY_NAME,
+            accessToken: data?.accessToken as string,
+        },
         ui: {
             menuCollapsed: localStorage.getItem('menuCollapsed') === 'true',
         }
