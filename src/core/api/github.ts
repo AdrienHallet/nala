@@ -1,24 +1,26 @@
 // GitHub API v3
 
 import { configuration, type Configuration } from "$core/configuration/state";
+import { FetchError } from "$core/model/fetch.error";
 import { Optional } from "$core/model/optional";
+import { Result } from "$core/model/result";
 import { get } from "svelte/store";
 
 const baseURL = 'https://api.github.com';
 let config: Optional<Configuration> = Optional.empty();
 
-export async function getContent(user: string, repository: string): Promise<unknown> {
+export async function getContent(user: string, repository: string): Promise<Result<any, FetchError>> {
     const response = await gitFetch(`${baseURL}/repos/${user}/${repository}/contents/`, {
         cache: "no-store",
     });
-    return response.json();
+    return response.map(response => response.json());
 }
 
-export async function getBlob(url: string): Promise<unknown> {
-    return await (await gitFetch(url)).json();
+export async function getBlob(url: string): Promise<Result<any, FetchError>> {
+    return (await gitFetch(url)).map(response => response.json());
 }
 
-async function gitFetch(url: RequestInfo, options?: RequestInit) {
+async function gitFetch(url: RequestInfo, options?: RequestInit): Promise<Result<Response, FetchError>> {
     if (!config.isPresent()) {
         setToken()
     }
@@ -29,9 +31,9 @@ async function gitFetch(url: RequestInfo, options?: RequestInit) {
     }
     const response = await fetch(url, updatedOptions)
     if (!response.ok) {
-        throw new Error(response + '');
+        return Result.err(FetchError.from(response));
     }
-    return response;
+    return Result.ok(response);
 }
 
 function setToken() {

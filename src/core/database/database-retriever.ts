@@ -6,21 +6,14 @@ import { get } from "svelte/store";
 export async function getGithubDatabase(): Promise<[blob: Blob, sha: string]> {
     const config = get(configuration);
 
-    try {
-        const content = await getContent(config.user.name, config.github.repository);
-        console.log('content:');
-        console.log(content);
-        const downloaded = await getBlob(content[0].git_url);
-        const blob = base64ToBlob(downloaded.content);
-        return [blob, downloaded.sha];
-
-    } catch (error) {
-        if (error.status === 404) {
-            console.log('not found');
-        } else {
-            console.log('other');
-            console.log(error);
+    const content = await getContent(config.user.name, config.github.repository);
+    if (content.isOk()) {
+        const downloaded = await getBlob(content.ok()[0].git_url);
+        if (downloaded.isOk()) {
+            const blob = await base64ToBlob(downloaded.ok().content);
+            return [blob, downloaded.ok().sha];
         }
+        throw new Error('undefined flow: donwloaded blob not ok');
     }
-
+    throw new Error('undefined flow: dowloaded content not ok');
 }

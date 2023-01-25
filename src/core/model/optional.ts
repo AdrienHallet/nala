@@ -13,6 +13,9 @@ export class Optional<T> {
     }
 
     public get(): T {
+        if (this.value == null) {
+            throw new Error('Tried to get an optional null value, is the empty flow defined?');
+        }
         return this.value as T;
     }
 
