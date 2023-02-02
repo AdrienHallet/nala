@@ -25,9 +25,15 @@ async function handleRepositoryDownloadFailure(error: FetchError, config: Config
         // Repository does not exist, probably the first time user accesses the app
         const createResponse = await createRepository(config.github.repository);
         if (createResponse.isOk()) {
+            // Repository successfully created!
             return Optional.empty();
         }
-        throw new Error('Could not create missing repository');
+        if (createResponse.err().status == 422) {
+            // Repository actually existed, therefore it's the file that must be missing
+            // So consider a successful creation!
+            return Optional.empty();
+        }
+        throw new Error('[GitHub] Could not create repository for an unhandled reason');
     }
     throw new Error('Unhandled error in repository donwload failure');
 }

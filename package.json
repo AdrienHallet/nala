@@ -34,6 +34,8 @@
 	"type": "module",
 	"dependencies": {
 		"@auth/core": "^0.2.4",
-		"@auth/sveltekit": "^0.1.11"
+		"@auth/sveltekit": "^0.1.11",
+		"dexie": "^3.2.3",
+		"dexie-export-import": "^1.0.3"
 	}
 }

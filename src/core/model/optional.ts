@@ -8,6 +8,13 @@ export class Optional<T> {
         return new Optional<T>(value);
     }
 
+    public static ofNullable<T>(value: T | null): Optional<T> {
+        if (value == null) {
+            return this.empty<T>();
+        }
+        return this.of<T>(value);
+    }
+
     public static empty<T>() {
         return new Optional<T>(null);
     }
