@@ -54,8 +54,6 @@ async function gitFetch(url: RequestInfo, options?: RequestInit): Promise<Result
 function setToken() {
     // Acceptable because the properties are extremely static
     config = Optional.of(get(configuration))
-    console.log('conf:');
-    console.log(config)
     if (config.get() == null) {
         throw new Error("Cannot contact GitHub API without configuration");
     }
