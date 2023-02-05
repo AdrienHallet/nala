@@ -1,18 +1,31 @@
 import { setDatabaseSha } from "$core/configuration/operations";
-import type { Configuration } from "$core/configuration/state";
-import type { Optional } from "$core/model/optional";
+import { Optional } from "$core/model/optional";
 import Dexie from "dexie";
-
+import {get} from 'svelte/store';
+import {configuration} from '$core/configuration/state';
+import {getGithubDatabase} from '$core/database/database-retriever';
 export class NalaDatabase extends Dexie {
 
+    private instance: Optional<NalaDatabase> = Optional.empty();
+
     private constructor(
-        configuration: Configuration,
-        imported: Optional<[Blob, string]>,
+        name: string,
     ) {
-        super(configuration.database.name);
-        if (imported.isPresent()) {
-            this.load(imported.get());
+        super(name);
+    }
+
+    public async get(): Promise<NalaDatabase> {
+        if (!this.instance.isPresent()) {
+            // If there is no database, create it
+            const currentConfig = get(configuration);
+            const retrievedDatabase = await getGithubDatabase();
+            this.instance = Optional.of(new NalaDatabase(currentConfig.database.name));
+            if (retrievedDatabase.isPresent()) {
+                // If there is a downloaded file, import it
+                await this.load(retrievedDatabase.get());
+            }
         }
+        return this.instance.get();
     }
 
     private async load([blob, sha]: [Blob, string]): Promise<void> {
