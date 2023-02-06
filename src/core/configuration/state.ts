@@ -14,7 +14,6 @@ export interface Configuration {
     database: {
         name: string;
         sha: Optional<string>;
-        isLoading: boolean;
     }
     ui: {
         menuCollapsed: boolean;
