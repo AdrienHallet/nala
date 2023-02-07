@@ -22,8 +22,8 @@ export class NalaDatabase extends Dexie {
 		if (!this.instance.isPresent()) {
 			// If there is no database, create it
 			const currentConfig = get(configuration);
-			const retrievedDatabase = await getGithubDatabase();
 			this.instance = Optional.of(new NalaDatabase(currentConfig.database.name));
+			const retrievedDatabase = await getGithubDatabase();
 			if (retrievedDatabase.isPresent()) {
 				// If there is a downloaded file, import it
 				await this.instance.get().load(retrievedDatabase.get());
@@ -42,6 +42,11 @@ export class NalaDatabase extends Dexie {
 				acceptVersionDiff: true,
 			})
 			.then(() => setDatabaseSha(sha));
+	}
+
+	async export(): Promise<Blob> {
+		await import('dexie-export-import');
+		return super.export();
 	}
 
 	private initSchema() {

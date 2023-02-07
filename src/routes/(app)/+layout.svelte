@@ -4,7 +4,7 @@
 	import Logo from '$ui/icons/logo.svelte';
 	import Avatar from '$ui/specifics/layout/avatar.svelte';
 	import SidebarItem from '$ui/specifics/layout/sidebar-item.svelte';
-	import Syncer from '$ui/specifics/syncer/syncer.svelte';
+	import Syncer from '$ui/specifics/layout/syncer.svelte';
 	import { page } from '$app/stores';
 	import { initialize, toggleMenu } from '$core/configuration/operations';
 	import { configuration } from '$core/configuration/state';
