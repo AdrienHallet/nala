@@ -3,17 +3,16 @@
 	import Hamburger from '$ui/icons/hamburger.svelte';
 	import Logo from '$ui/icons/logo.svelte';
 	import Avatar from '$ui/specifics/layout/avatar.svelte';
-	import SidbarItem from '$ui/specifics/layout/sidbar-item.svelte';
+	import SidebarItem from '$ui/specifics/layout/sidebar-item.svelte';
+	import Syncer from '$ui/specifics/layout/syncer.svelte';
 	import { page } from '$app/stores';
+	import { initialize, toggleMenu } from '$core/configuration/operations';
+	import { configuration } from '$core/configuration/state';
+	import { loading } from '$core/loading/state';
+	import { NalaDatabase } from '$core/database/database.js';
 
-	let collapse = true;
-
-	const toggleMenu = () => {
-		collapse = !collapse;
-	};
-
-	let username: string = $page?.data?.session?.user?.name as string;
-	let avatarUrl: string = $page?.data?.session?.user?.image as string;
+	initialize($page.data);
+	$: collapse = $configuration.ui.menuCollapsed;
 </script>
 
 <div class="z-50 flex h-16 w-full items-center bg-zinc-900 text-zinc-300">
@@ -27,7 +26,7 @@
 				? 'opacity-0'
 				: ''}"
 		>
-			<Logo classes="h-6 pl-3 " />
+			<Logo classes="h-6 pl-3" />
 			<span class="pl-3 text-2xl">NALA</span>
 		</span>
 		<span
@@ -48,7 +47,10 @@
 		<Logo classes="h-6" />
 		<span class="hidden pl-3 text-2xl sm:block">NALA</span>
 	</div>
-	<div class="absolute right-0 flex pr-4"><Avatar {username} {avatarUrl} /></div>
+	<div class="absolute right-0 flex gap-2 pr-4">
+		<Syncer />
+		<Avatar username={$configuration.user.name} avatarUrl={$configuration.user.avatarUrl} />
+	</div>
 </div>
 <div class="z-0 flex w-full flex-grow flex-row overflow-auto overflow-x-hidden">
 	<div
@@ -58,16 +60,21 @@
 			: 'sm:w-64'} "
 	>
 		<div class="flex h-full w-full grow flex-col items-center justify-start space-y-3 p-5 ">
-			<SidbarItem bind:collapse>
+			<SidebarItem bind:collapse>
 				<Dashboard classes="w-6 absolute" slot="icon" />
 				Dashboard
-			</SidbarItem>
+			</SidebarItem>
 			<div class="flex w-full flex-col items-center">
 				<hr class="flex h-px w-full border-zinc-400" />
 			</div>
 		</div>
 	</div>
 	<div class="">
-		<slot />
+		{#if $loading.database}
+			I'm loading!
+			{NalaDatabase.get()}
+		{:else}
+			<slot />
+		{/if}
 	</div>
 </div>
