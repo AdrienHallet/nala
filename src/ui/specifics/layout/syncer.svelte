@@ -3,6 +3,8 @@
 	import { transactionsChange } from '$core/database/transaction/state';
 	import { derived, type Readable } from 'svelte/store';
 	import { databaseExporter } from '$core/database/database-exporter';
+	import { loading } from '../../../core/loading/state';
+	import { Loading } from '../../../core/model/loading/loading';
 
 	// When the syncer is actively listening
 	let isActive = true;
@@ -14,6 +16,12 @@
 	const databaseChange: Readable<boolean[]> = derived([transactionsChange], (values, set) => {
 		set([...values]);
 	});
+
+	$: $loading, onLoadingChange($loading);
+
+	function onLoadingChange(loading: Loading) {
+		isActive = !loading.database;
+	}
 
 	$: $databaseChange, onDatabaseChange($databaseChange);
 

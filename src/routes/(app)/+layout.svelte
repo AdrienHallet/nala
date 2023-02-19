@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Dashboard from '$ui/icons/dashboard.svelte';
 	import Hamburger from '$ui/icons/hamburger.svelte';
+	import TableCells from '$ui/icons/table-cells.svelte';
 	import Logo from '$ui/icons/logo.svelte';
 	import Avatar from '$ui/specifics/layout/avatar.svelte';
 	import SidebarItem from '$ui/specifics/layout/sidebar-item.svelte';
@@ -12,10 +13,11 @@
 	import { NalaDatabase } from '$core/database/database.js';
 
 	initialize($page.data);
+	NalaDatabase.get();
 	$: collapse = $configuration.ui.menuCollapsed;
 </script>
 
-<div class="z-50 flex h-16 w-full items-center bg-zinc-900 text-zinc-300">
+<div class="z-50 flex h-16 w-full items-center bg-zinc-900">
 	<div
 		class="relative flex h-full items-center transition-width duration-500 {collapse
 			? 'sm:w-16'
@@ -60,19 +62,27 @@
 			: 'sm:w-64'} "
 	>
 		<div class="flex h-full w-full grow flex-col items-center justify-start space-y-3 p-5 ">
-			<SidebarItem bind:collapse>
+			<SidebarItem bind:collapse link="/">
 				<Dashboard classes="w-6 absolute" slot="icon" />
 				Dashboard
+			</SidebarItem>
+			<SidebarItem bind:collapse link="/transactions">
+				<TableCells classes="w-6 absolute" slot="icon" />
+				Transactions
 			</SidebarItem>
 			<div class="flex w-full flex-col items-center">
 				<hr class="flex h-px w-full border-zinc-400" />
 			</div>
 		</div>
 	</div>
-	<div class="">
+	<div class="h-full w-full">
 		{#if $loading.database}
-			I'm loading!
-			{NalaDatabase.get()}
+			<div class="flex h-full">
+				<div class="m-auto animate-pulse">
+					<Logo classes="h-40 mx-auto" />
+					<p class="w-full text-center text-xl">Loading</p>
+				</div>
+			</div>
 		{:else}
 			<slot />
 		{/if}
