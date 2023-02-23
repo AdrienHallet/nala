@@ -57,11 +57,13 @@
 <div class="z-0 flex w-full flex-grow flex-row overflow-auto overflow-x-hidden">
 	<div
 		id="Main"
-		class="absolute z-50 h-full max-h-full w-full transform items-start justify-start overflow-y-auto overflow-x-hidden bg-zinc-900 transition-all duration-500 ease-in-out sm:relative sm:h-auto xl:translate-x-0 xl:rounded-r {collapse
+		class="absolute z-50 h-full max-h-full w-full transform items-start justify-start overflow-x-hidden overflow-y-hidden bg-zinc-900 transition-all duration-500 ease-in-out sm:relative sm:h-auto xl:translate-x-0 xl:rounded-r {collapse
 			? '-translate-x-full sm:flex sm:w-16 sm:translate-x-0'
 			: 'sm:w-64'} "
 	>
-		<div class="flex h-full w-full grow flex-col items-center justify-start space-y-3 p-5 ">
+		<div
+			class="flex h-full w-full grow flex-col items-center justify-start space-y-3 overflow-y-auto p-5"
+		>
 			<SidebarItem bind:collapse link="/">
 				<Dashboard classes="w-6 absolute" slot="icon" />
 				Dashboard
@@ -75,7 +77,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="h-full w-full">
+	<div class="h-full max-h-[calc(100vh-4em)] w-full overflow-y-auto">
 		{#if $loading.database}
 			<div class="flex h-full">
 				<div class="m-auto animate-pulse">
