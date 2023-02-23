@@ -62,7 +62,7 @@
 			: 'sm:w-64'} "
 	>
 		<div
-			class="flex h-full w-full grow flex-col items-center justify-start space-y-3 overflow-y-auto p-5"
+			class="flex h-full w-full grow flex-col items-center justify-start space-y-3 overflow-y-auto overflow-x-hidden p-5"
 		>
 			<SidebarItem bind:collapse link="/">
 				<Dashboard classes="w-6 absolute" slot="icon" />
@@ -77,7 +77,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="h-full max-h-[calc(100vh-4em)] w-full overflow-y-auto">
+	<div class="h-full flex-grow overflow-y-auto">
 		{#if $loading.database}
 			<div class="flex h-full">
 				<div class="m-auto animate-pulse">
