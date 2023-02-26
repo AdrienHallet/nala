@@ -2,6 +2,7 @@ import { NalaDatabase } from '$core/database/database';
 import type { Transaction } from '$core/model/database/transaction';
 
 export const getDBTransactions = async (): Promise<Transaction[]> => {
+	// Todo: transactions without a date get lost in time and space. They should be cleaned up and never exist instead.
 	const result = (await NalaDatabase.get()).transactions.orderBy('date').reverse().toArray();
 	return result;
 	// Anonymize bout
