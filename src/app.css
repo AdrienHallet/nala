@@ -15,7 +15,7 @@
 @layer components {
 
     button {
-        @apply bg-zinc-700 border rounded hover:bg-zinc-800 active:bg-zinc-600
+        @apply bg-zinc-700 border rounded hover:bg-zinc-800 active:bg-zinc-600 border-zinc-400
     }
 
     option {

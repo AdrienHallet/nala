@@ -8,6 +8,11 @@
 
 	getTransactions();
 
+	$: $transactions,
+		() => {
+			console.log($transactions);
+		};
+
 	function onAddClick() {
 		addTransaction(new Transaction());
 	}
@@ -35,7 +40,7 @@
 					<button on:click={onAddClick} class="px-2">Add</button>
 				</div>
 			</div>
-			<TransactionItem slot="row" let:item transaction={item}>row</TransactionItem>
+			<TransactionItem slot="row" let:item transaction={item} />
 		</VirtualScroll>
 	</div>
 </div>

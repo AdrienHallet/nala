@@ -9,4 +9,14 @@ export class Transaction {
 		// New transactions assume today
 		this.date = new Date().toISOString().split('T')[0];
 	}
+
+	equals(other: Transaction) {
+		return (
+			this.id === other.id &&
+			this.date === other.date &&
+			this.amount === other.amount &&
+			this.title === other.title &&
+			this.categoryId === other.categoryId
+		);
+	}
 }
