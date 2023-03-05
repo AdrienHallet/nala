@@ -8,11 +8,6 @@
 
 	getTransactions();
 
-	$: $transactions,
-		() => {
-			console.log($transactions);
-		};
-
 	function onAddClick() {
 		addTransaction(new Transaction());
 	}

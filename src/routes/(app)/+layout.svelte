@@ -2,6 +2,7 @@
 	import Dashboard from '$ui/icons/dashboard.svelte';
 	import Hamburger from '$ui/icons/hamburger.svelte';
 	import TableCells from '$ui/icons/table-cells.svelte';
+	import Tag from '$ui/icons/tag.svelte';
 	import Logo from '$ui/icons/logo.svelte';
 	import Avatar from '$ui/specifics/layout/avatar.svelte';
 	import SidebarItem from '$ui/specifics/layout/sidebar-item.svelte';
@@ -71,6 +72,10 @@
 			<SidebarItem bind:collapse link="/transactions">
 				<TableCells classes="w-6 absolute" slot="icon" />
 				Transactions
+			</SidebarItem>
+			<SidebarItem bind:collapse link="/categories">
+				<Tag classes="w-6 absolute" slot="icon" />
+				Categories
 			</SidebarItem>
 			<div class="flex w-full flex-col items-center">
 				<hr class="flex h-px w-full border-zinc-400" />

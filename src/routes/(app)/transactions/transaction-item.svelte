@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { categories } from '$core/database/category/state.js';
 	import { updateTransaction } from '../../../core/database/transaction/operations';
 	import { Transaction } from '../../../core/model/database/transaction';
 	import { TRANSACTIONS_LAYOUT } from './constants.js';
@@ -32,7 +33,7 @@
 	<input type="date" class="ring-inset" bind:value={transaction.date} />
 	<input class="hidden" bind:value={transaction.amount} step="any" type="number" />
 	<input
-		class="w-full bg-transparent text-right"
+		class="w-full bg-transparent text-right ring-inset"
 		bind:value={amountDisplay}
 		step="any"
 		type="number"
@@ -41,10 +42,10 @@
 		on:input={onAmountInput}
 	/>
 	<select class="ring-inset" bind:value={transaction.categoryId}>
-		<!-- Todo categories -->
 		<option value="" />
-		<option>One</option>
-		<option>Two</option>
+		{#each $categories as category}
+			<option value={category.id}>{category.name}</option>
+		{/each}
 	</select>
 	<input type="text" class="ring-inset" bind:value={transaction.title} />
 </div>

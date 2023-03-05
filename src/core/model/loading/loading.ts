@@ -1,3 +1,3 @@
 export class Loading {
-	constructor(public database = true, public transactions = true) {}
+	constructor(public database = true, public transactions = true, public categories = true) {}
 }

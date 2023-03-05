@@ -3,6 +3,28 @@
 @tailwind utilities;
 
 @layer base {
+    /*Firefox*/
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: theme('colors.zinc.700') theme('colors.zinc.600');
+    }
+    /*Chrome, Edge, Safari*/
+    *::-webkit-scrollbar {
+        width: 8px;
+    }
+    *::-webkit-scrollbar-track {
+        background: theme('colors.zinc.500');
+        border-radius: 1em;
+    }
+    *::-webkit-scrollbar-thumb {
+        background-color: theme('colors.zinc.600');
+        border-radius: 10px;
+        border: 1px solid theme('colors.zinc.700');
+    }
+
+    /*
+        Input buttons
+     */
     input[type='number']::-webkit-outer-spin-button,
     input[type='number']::-webkit-inner-spin-button,
     input[type='number'] {
