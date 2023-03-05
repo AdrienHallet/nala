@@ -10,6 +10,9 @@ export function setLoading(component: LoadingComponent, value: boolean) {
 			case LoadingComponent.DATABASE:
 				loading.database = value;
 				break;
+			case LoadingComponent.CATEGORIES:
+				loading.categories = value;
+				break;
 			default:
 				throw new Error(`[Loading] Unmapped component: ${component}`);
 		}

@@ -7,9 +7,11 @@ import { getGithubDatabase } from '$core/database/database-retriever';
 import type { Transaction } from '$core/model/database/transaction';
 import { setLoading } from '$core/loading/operations';
 import { LoadingComponent } from '$core/model/loading/component';
+import type { Category } from '../model/database/category';
 
 export class NalaDatabase extends Dexie {
 	public transactions!: Dexie.Table<Transaction, number>;
+	public categories!: Dexie.Table<Category, number>;
 
 	private static instance: Optional<NalaDatabase> = Optional.empty();
 

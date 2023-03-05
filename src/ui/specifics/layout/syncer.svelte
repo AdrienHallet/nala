@@ -1,8 +1,11 @@
 <script lang="ts">
 	import ArrowUp from '$ui/icons/arrow-up.svelte';
-	import { transactionsChange } from '$core/database/transaction/state';
 	import { derived, type Readable } from 'svelte/store';
 	import { databaseExporter } from '$core/database/database-exporter';
+	import { categoriesChange } from '../../../core/database/category/state';
+	import { transactionsChange } from '../../../core/database/transaction/state';
+	import { loading } from '../../../core/loading/state';
+	import { Loading } from '../../../core/model/loading/loading';
 
 	// When the syncer is actively listening
 	let isActive = true;
@@ -11,9 +14,18 @@
 	// When the syncer has no change to process
 	let isFresh = true;
 
-	const databaseChange: Readable<boolean[]> = derived([transactionsChange], (values, set) => {
-		set([...values]);
-	});
+	const databaseChange: Readable<boolean[]> = derived(
+		[transactionsChange, categoriesChange],
+		(values, set) => {
+			set([...values]);
+		},
+	);
+
+	$: $loading, onLoadingChange($loading);
+
+	function onLoadingChange(loading: Loading) {
+		isActive = !loading.database;
+	}
 
 	$: $databaseChange, onDatabaseChange($databaseChange);
 
@@ -23,7 +35,7 @@
 		}
 	}
 
-	let exportTimeout: number;
+	let exportTimeout: NodeJS.Timer;
 	function processChange() {
 		if (!isActive) {
 			// DB synchronization de-activated
