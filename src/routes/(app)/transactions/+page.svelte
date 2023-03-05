@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { transactions } from '$core/database/transaction/state.js';
 	import VirtualScroll from '$ui/components/virtual-scroll.svelte';
+	import { getCategories } from '../../../core/database/category/operations';
 	import { addTransaction, getTransactions } from '../../../core/database/transaction/operations';
 	import { Transaction } from '../../../core/model/database/transaction';
 	import TransactionItem from './transaction-item.svelte';
 	import { TRANSACTIONS_LAYOUT } from './constants.js';
 
 	getTransactions();
+	getCategories();
 
 	function onAddClick() {
 		addTransaction(new Transaction());
