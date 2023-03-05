@@ -6,7 +6,8 @@ Nala (Network Attached Little Assistant) is a personal assistant web application
 
 ## Features
 
-- Not much yet, it is very much a work-in-progress!
+- Register transactions
+- Categorize transactions
 
 ## Developers
 
