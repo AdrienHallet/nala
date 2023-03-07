@@ -10,7 +10,6 @@
 	import { page } from '$app/stores';
 	import { initialize, toggleMenu } from '$core/configuration/operations';
 	import { configuration } from '$core/configuration/state';
-	import { loading } from '$core/loading/state';
 	import { NalaDatabase } from '$core/database/database.js';
 
 	initialize($page.data);
@@ -83,15 +82,6 @@
 		</div>
 	</div>
 	<div class="h-full flex-grow overflow-y-auto">
-		{#if $loading.database}
-			<div class="flex h-full">
-				<div class="m-auto animate-pulse">
-					<Logo classes="h-40 mx-auto" />
-					<p class="w-full text-center text-xl">Loading</p>
-				</div>
-			</div>
-		{:else}
-			<slot />
-		{/if}
+		<slot />
 	</div>
 </div>
