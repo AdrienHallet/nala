@@ -71,63 +71,12 @@
 			<SidebarItem bind:collapse link="/transactions">
 				<TableCells classes="w-6" slot="icon" />
 				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
-			</SidebarItem><SidebarItem bind:collapse link="/transactions">
-				<TableCells classes="w-6" slot="icon" />
-				Transactions
 			</SidebarItem>
 			<SidebarItem bind:collapse link="/categories">
 				<Tag classes="w-6" slot="icon" />
 				Categories
 			</SidebarItem>
-			<div class="flex w-full flex-col items-center">
+			<div class="flex w-full flex-col items-center px-3">
 				<hr class="flex h-px w-full border-zinc-400" />
 			</div>
 		</div>
