@@ -22,6 +22,9 @@
 	}
 </script>
 
-<div class="h-[500px] w-full">
-	<canvas />
+<div class="flex max-h-full flex-col shadow-2xl">
+	<span class="pl-4 text-lg font-semibold">Balance</span>
+	<div class="relative h-full w-full">
+		<canvas class="absolute" />
+	</div>
 </div>

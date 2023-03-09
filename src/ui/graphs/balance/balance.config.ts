@@ -17,6 +17,7 @@ export function balanceConfig(
 			],
 		},
 		options: {
+			responsive: true,
 			maintainAspectRatio: false,
 			parsing: {
 				xAxisKey: 'date',
