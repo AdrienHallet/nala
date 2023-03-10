@@ -6,9 +6,11 @@
 	import { balanceConfig } from './balance.config';
 
 	let chart;
+	let canvas;
+
 	getTransactions();
+
 	onMount(async () => {
-		const canvas = document.getElementsByTagName('canvas')[0];
 		chart = new Chart(canvas, balanceConfig($dailyState));
 	});
 
@@ -25,6 +27,6 @@
 <div class="flex max-h-full flex-col shadow-2xl">
 	<span class="pl-4 text-lg font-semibold">Balance</span>
 	<div class="relative h-full w-full">
-		<canvas class="absolute" />
+		<canvas bind:this={canvas} class="absolute" />
 	</div>
 </div>
