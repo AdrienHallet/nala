@@ -3,13 +3,12 @@
 	export let link = '#';
 </script>
 
-<a
-	class="jusitfy-start flex h-10 w-full items-center space-x-11 rounded hover:bg-zinc-700 focus:bg-zinc-700"
-	href={link}
->
-	<slot name="icon" />
+<a class="grid min-h-[3rem] w-full grid-cols-[4rem_1fr] items-center hover:bg-zinc-700" href={link}>
+	<div class="justify-self-center">
+		<slot name="icon" />
+	</div>
 	<p
-		class=" my-auto text-xl transition-opacity duration-200 ease-in-out {collapse
+		class="justify-self-start text-xl transition-opacity duration-200 ease-in-out {collapse
 			? 'opacity-0'
 			: 'opacity-100 delay-200'}"
 	>
