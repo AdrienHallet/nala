@@ -10,4 +10,6 @@ export const categoryCountState: Readable<CategoryCount[]> = derived(
 	categoryCountFn,
 );
 
+export const categoryCountTopTenState: Writable<CategoryCount[]> = writable();
+
 export const categoriesChange: Writable<boolean | Date> = writable(false);

@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { transactions } from '$core/database/transaction/state.js';
 	import { Chart } from 'chart.js/auto';
 	import { onMount } from 'svelte';
 	import { getCategories } from '../../../core/database/category/operations';
-	import { categories, categoryCountState } from '../../../core/database/category/state';
+	import { categoryCountState } from '../../../core/database/category/state';
 	import { getTransactions } from '../../../core/database/transaction/operations';
 	import { categoryCountConfig } from './categories.config';
 
@@ -17,14 +16,13 @@
 		chart = new Chart(canvas, categoryCountConfig($categoryCountState ?? []));
 	});
 
-	$: $transactions, $categories, $categoryCountState, updateChart();
+	$: $categoryCountState, updateChart();
 	function updateChart() {
-		if (!chart) {
+		if (!chart || $categoryCountState.length < 1) {
 			return;
 		}
-		chart.data.label = $categoryCountState.map((count) => count.category?.name);
-		chart.data.datasets[0].data = $categoryCountState.map((count) => count.count);
-		chart.update();
+		chart.destroy();
+		chart = new Chart(canvas, categoryCountConfig($categoryCountState ?? []));
 	}
 </script>
 

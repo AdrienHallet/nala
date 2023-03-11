@@ -22,9 +22,9 @@ export function categoryCountFn(
 			(categoryCountMap.get(transaction.categoryId) as number) + 1,
 		);
 	});
-	const categoryCount = Array.from(categoryCountMap, ([id, count]) => ({
+	const categoryCounts = Array.from(categoryCountMap, ([id, count]) => ({
 		category: categories.find((cat) => cat.id === id),
 		count: count,
-	}));
-	set(categoryCount);
+	})).sort((a, b) => b.count - a.count);
+	set(categoryCounts);
 }
