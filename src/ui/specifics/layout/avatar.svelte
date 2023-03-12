@@ -54,7 +54,7 @@
 	</div>
 	{#if isExpanded}
 		<nav
-			class="absolute right-0 top-8 mt-2 w-32 min-w-full rounded-md border border-zinc-600 bg-zinc-700 pt-1 text-base sm:rounded-t-none"
+			class="absolute right-0 top-8 z-50 mt-2 w-32 min-w-full rounded-md border border-zinc-600 bg-zinc-700 pt-1 text-base sm:rounded-t-none"
 		>
 			<hr class="mt-1 border-zinc-500" />
 			<ul transition:slide={{ duration: 100 }}>
