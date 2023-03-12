@@ -29,6 +29,6 @@
 <div class="flex max-h-full flex-col shadow-2xl">
 	<span class="pl-4 text-lg font-semibold">Categories</span>
 	<div class="relative h-full w-full">
-		<canvas bind:this={canvas} class="absolute" />
+		<canvas bind:this={canvas} class="absolute overflow-hidden" />
 	</div>
 </div>

@@ -67,7 +67,7 @@
 </script>
 
 <div
-	class="flex w-6 cursor-pointer items-center justify-center rounded-sm border-zinc-600 hover:border"
+	class="flex h-8 w-6 cursor-pointer items-center justify-center rounded-sm border-zinc-600 hover:border"
 	on:click={toggle}
 	on:keypress={toggle}
 >

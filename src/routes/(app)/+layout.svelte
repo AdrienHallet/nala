@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { total } from '$core/database/balance/state.js';
+	import { amountFormat } from '$ui/formatters.js';
 	import Dashboard from '$ui/icons/dashboard.svelte';
 	import Hamburger from '$ui/icons/hamburger.svelte';
 	import TableCells from '$ui/icons/table-cells.svelte';
@@ -11,45 +13,49 @@
 	import { initialize, toggleMenu } from '$core/configuration/operations';
 	import { configuration } from '$core/configuration/state';
 	import { NalaDatabase } from '$core/database/database.js';
+	import { getTransactions } from '../../core/database/transaction/operations';
 
 	initialize($page.data);
 	NalaDatabase.get();
+
+	getTransactions();
+
 	$: collapse = $configuration.ui.menuCollapsed;
 </script>
 
-<div class="z-50 flex h-16 min-h-[4rem] w-full items-center bg-zinc-900">
-	<div
-		class="relative flex h-full items-center transition-width duration-500 {collapse
-			? 'sm:w-16'
-			: 'sm:w-64'} "
-	>
-		<span
-			class="hidden items-center transition-opacity delay-150 duration-100 ease-in sm:flex {collapse
+<div
+	class="grid grid-cols-[4rem_1fr_4rem] grid-rows-[4rem] bg-zinc-900 transition-all duration-500 ease-in-out {collapse
+		? 'sm:grid-cols-[4rem_1fr_0rem]'
+		: 'sm:grid-cols-[16rem_1fr_0rem]'}"
+>
+	<div on:click={toggleMenu} on:keypress={toggleMenu} class="relative flex items-center ">
+		<div
+			class="invisible flex pl-3 transition-opacity delay-150 ease-in sm:visible {collapse
 				? 'opacity-0'
 				: ''}"
 		>
-			<Logo classes="h-6 pl-3" />
-			<span class="pl-3 text-2xl">NALA</span>
-		</span>
-		<span
-			on:click={toggleMenu}
-			on:keypress={toggleMenu}
-			class="transition- absolute left-5 z-50 cursor-pointer duration-500 hover:text-zinc-600 hover:transition-none sm:left-auto {collapse
-				? 'sm:right-5'
-				: 'sm:right-1'}"
+			<Logo classes="h-6 my-auto" />
+			<span class="text-2xl">NALA</span>
+		</div>
+		<Hamburger
+			classes="h-6 top-5 absolute flex-grow right-5 hover:cursor-pointer hover:text-zinc-600"
+			bind:collapsed={collapse}
+		/>
+	</div>
+	<div class="flex items-center">
+		<div
+			class="invisible absolute flex transition-opacity delay-150 sm:visible {collapse
+				? ''
+				: 'opacity-0'}"
 		>
-			<Hamburger classes="w-6" bind:collapsed={collapse} />
-		</span>
+			<Logo classes="h-6 my-auto" />
+			<span class="text-2xl">NALA</span>
+		</div>
+		{#if $total}
+			<div class="flex-grow text-center">Tot.: € {amountFormat($total?.toFixed(2))}</div>
+		{/if}
 	</div>
-	<div
-		class="flex flex-grow items-center justify-center justify-items-center transition-opacity duration-100 ease-in sm:left-16 sm:flex-none {collapse
-			? 'sm:delay-200'
-			: 'sm:hidden sm:opacity-0'}"
-	>
-		<Logo classes="h-6" />
-		<span class="hidden pl-3 text-2xl sm:block">NALA</span>
-	</div>
-	<div class="absolute right-0 flex gap-2 pr-4">
+	<div class="flex items-center gap-3 justify-self-end pr-3">
 		<Syncer />
 		<Avatar username={$configuration.user.name} avatarUrl={$configuration.user.avatarUrl} />
 	</div>
