@@ -35,7 +35,7 @@
 				: ''}"
 		>
 			<Logo classes="h-6 my-auto" />
-			<span class="text-2xl">NALA</span>
+			<span class="pl-2 text-2xl">NALA</span>
 		</div>
 		<Hamburger
 			classes="h-6 top-5 absolute flex-grow right-5 hover:cursor-pointer hover:text-zinc-600"
@@ -49,7 +49,7 @@
 				: 'opacity-0'}"
 		>
 			<Logo classes="h-6 my-auto" />
-			<span class="text-2xl">NALA</span>
+			<span class="pl-2 text-2xl">NALA</span>
 		</div>
 		{#if $total}
 			<div class="flex-grow text-center">Tot.: € {amountFormat($total?.toFixed(2))}</div>
