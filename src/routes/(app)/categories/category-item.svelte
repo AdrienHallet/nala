@@ -6,9 +6,9 @@
 	export let category: Category;
 	let originalCategory: Category | undefined = undefined;
 
-	$: category, onCateogryChange();
+	$: category, onCategoryChange();
 
-	function onCateogryChange() {
+	function onCategoryChange() {
 		if (!originalCategory || originalCategory.id != category.id) {
 			// Render of the component with a new category (might be first or n time)
 			originalCategory = category;
@@ -25,5 +25,5 @@
 
 <div class={CATEGORIES_LAYOUT}>
 	<input type="text" class="ring-inset" bind:value={category.name} />
-	<input type="text" class="ring-inset" bind:value={category.name} />
+	<input type="text" class="ring-inset" bind:value={category.description} />
 </div>

@@ -54,7 +54,7 @@ export class NalaDatabase extends Dexie {
 	private initSchema() {
 		this.version(1).stores({
 			transactions: '++id, date, amount, title, categoryId',
-			categories: '++id, name',
+			categories: '++id, name, description',
 		});
 	}
 }

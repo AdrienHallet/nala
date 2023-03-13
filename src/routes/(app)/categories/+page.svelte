@@ -33,7 +33,7 @@
 					slot="header"
 				>
 					<div class="py-2 text-left">Name</div>
-					<div class="py-2 text-left">?</div>
+					<div class="py-2 text-left">Description</div>
 					<div class="py-2 text-left">
 						<button on:click={onAddClick} class="px-2">Add</button>
 					</div>
