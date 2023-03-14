@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { categories } from '$core/database/category/state.js';
+	import { deleteTransaction } from '$core/database/transaction/operations.js';
 	import Trash from '$ui/icons/Trash.svelte';
 	import { onMount } from 'svelte';
 	import { updateTransaction } from '../../../core/database/transaction/operations';
@@ -23,6 +24,7 @@
 		if (!originalTransaction || originalTransaction.id != transaction.id) {
 			// Render of the component with a new transaction (might be first or n time)
 			originalTransaction = transaction;
+			amountDisplay = ((transaction.amount || 0) / 100).toFixed(2);
 			return;
 		}
 		transaction = Object.assign(new Transaction(), transaction);
@@ -57,7 +59,11 @@
 		{/each}
 	</select>
 	<input type="text" class="ring-inset" bind:value={transaction.title} />
-	<div class="group w-full cursor-pointer px-3 {!focused ? 'hidden' : ''}">
+	<div
+		on:keyup={() => deleteTransaction(transaction)}
+		on:click={() => deleteTransaction(transaction)}
+		class="group w-full cursor-pointer px-3"
+	>
 		<div class="group-hover:bg-zinc-500">
 			<Trash classes="h-6 mx-auto ">D</Trash>
 		</div>
