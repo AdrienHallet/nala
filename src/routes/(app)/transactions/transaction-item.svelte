@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { categories } from '$core/database/category/state.js';
+	import Trash from '$ui/icons/Trash.svelte';
+	import { onMount } from 'svelte';
 	import { updateTransaction } from '../../../core/database/transaction/operations';
 	import { Transaction } from '../../../core/model/database/transaction';
 	import { TRANSACTIONS_LAYOUT } from './constants.js';
@@ -7,8 +9,15 @@
 	export let transaction: Transaction;
 	let originalTransaction: Transaction | undefined = undefined;
 	let amountDisplay = ((transaction.amount || 0) / 100).toFixed(2);
+	let component: Element;
+	let focused = false;
 
 	$: transaction, onTransactionChange();
+
+	onMount(() => {
+		component.addEventListener('focusin', () => (focused = true));
+		component.addEventListener('focusout', () => (focused = false));
+	});
 
 	function onTransactionChange() {
 		if (!originalTransaction || originalTransaction.id != transaction.id) {
@@ -29,7 +38,7 @@
 	}
 </script>
 
-<div class={TRANSACTIONS_LAYOUT}>
+<div bind:this={component} class={TRANSACTIONS_LAYOUT}>
 	<input type="date" class="ring-inset" bind:value={transaction.date} />
 	<input class="hidden" bind:value={transaction.amount} step="any" type="number" />
 	<input
@@ -48,4 +57,9 @@
 		{/each}
 	</select>
 	<input type="text" class="ring-inset" bind:value={transaction.title} />
+	<div class="group w-full cursor-pointer px-3 {!focused ? 'hidden' : ''}">
+		<div class="group-hover:bg-zinc-500">
+			<Trash classes="h-6 mx-auto ">D</Trash>
+		</div>
+	</div>
 </div>

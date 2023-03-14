@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		<div class="h-[calc(100vh-116px)] overflow-x-auto px-2">
-			<VirtualScroll items={$transactions} classes="min-w-[500px]">
+			<VirtualScroll items={$transactions} classes="min-w-[600px]">
 				<div
 					class="{TRANSACTIONS_LAYOUT} sticky top-0 auto-rows-auto overflow-hidden border border-x-0 bg-gradient-to-r from-zinc-800 to-stone-800"
 					slot="header"
