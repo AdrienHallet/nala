@@ -16,5 +16,9 @@ module.exports = {
 			}
 		}
 	},
-	plugins: []
+	plugins: [],
+	future: {
+		// Disables hover on mobile, so we aren't stuck with hover style on touch
+		hoverOnlyWhenSupported: true,
+	}
 };
