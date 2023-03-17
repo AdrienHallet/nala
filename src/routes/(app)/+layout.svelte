@@ -26,7 +26,7 @@
 <div
 	class="grid grid-cols-[4rem_1fr_4rem] grid-rows-[4rem] bg-zinc-900 transition-all duration-500 ease-in-out {collapse
 		? 'sm:grid-cols-[4rem_1fr_0rem]'
-		: 'sm:grid-cols-[16rem_1fr_0rem]'}"
+		: 'sm:grid-cols-[16rem_1fr_16rem] md:grid-cols-[16rem_1fr_0rem]'}"
 >
 	<div on:click={toggleMenu} on:keypress={toggleMenu} class="relative flex items-center ">
 		<div
@@ -60,7 +60,11 @@
 		<Avatar username={$configuration.user.name} avatarUrl={$configuration.user.avatarUrl} />
 	</div>
 </div>
-<div class="z-0 flex w-full flex-grow flex-row overflow-auto overflow-x-hidden">
+<div
+	class="z-0 grid h-full overflow-auto overflow-x-hidden transition-all duration-500 ease-in-out {collapse
+		? 'sm:grid-cols-[4rem_1fr_0rem]'
+		: 'sm:grid-cols-[16rem_1fr_0rem]'}"
+>
 	<div
 		id="Main"
 		class="absolute z-50 h-[calc(100vh-4rem)] w-full transform items-start justify-start overflow-x-hidden overflow-y-hidden bg-zinc-900 transition-all duration-500 ease-in-out sm:relative sm:h-auto xl:translate-x-0 xl:rounded-r {collapse
@@ -87,7 +91,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="h-full flex-grow overflow-y-auto">
+	<div class="h-full overflow-y-auto">
 		<slot />
 	</div>
 </div>
