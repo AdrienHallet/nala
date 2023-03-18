@@ -24,12 +24,13 @@ export class NalaDatabase extends Dexie {
 		if (!this.instance.isPresent()) {
 			// If there is no database, create it
 			const currentConfig = get(configuration);
-			this.instance = Optional.of(new NalaDatabase(currentConfig.database.name));
+			const database = new NalaDatabase(currentConfig.database.name);
 			const retrievedDatabase = await getGithubDatabase();
 			if (retrievedDatabase.isPresent()) {
 				// If there is a downloaded file, import it
-				await this.instance.get().load(retrievedDatabase.get());
+				await database.load(retrievedDatabase.get());
 			}
+			this.instance = Optional.of(database);
 			setLoading(LoadingComponent.DATABASE, false);
 		}
 		return this.instance.get();
@@ -41,6 +42,7 @@ export class NalaDatabase extends Dexie {
 		return super
 			.import(blob, {
 				clearTablesBeforeImport: true,
+				overwriteValues: true,
 				acceptVersionDiff: true,
 			})
 			.then(() => setDatabaseSha(sha));
