@@ -65,7 +65,7 @@
 		class="group w-full cursor-pointer px-3"
 	>
 		<div class="group-hover:bg-zinc-500">
-			<Trash classes="h-6 mx-auto ">D</Trash>
+			<Trash classes="h-6 mx-auto " />
 		</div>
 	</div>
 </div>
