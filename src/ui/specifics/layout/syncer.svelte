@@ -5,6 +5,7 @@
 	import { categoriesChange } from '../../../core/database/category/state';
 	import { transactionsChange } from '../../../core/database/transaction/state';
 	import { loading } from '../../../core/loading/state';
+	import { DatabaseChange } from '../../../core/model/database/database-change';
 	import { Loading } from '../../../core/model/loading/loading';
 
 	// When the syncer is actively listening
@@ -14,10 +15,10 @@
 	// When the syncer has no change to process
 	let isFresh = true;
 
-	const databaseChange: Readable<boolean[]> = derived(
+	const databaseChange: Readable<DatabaseChange> = derived(
 		[transactionsChange, categoriesChange],
 		(values, set) => {
-			set([...values]);
+			set(new DatabaseChange(values[0], values[1]));
 		},
 	);
 
@@ -29,8 +30,8 @@
 
 	$: $databaseChange, onDatabaseChange($databaseChange);
 
-	function onDatabaseChange(changes: boolean[]) {
-		if (!changes.every((value) => value === false)) {
+	function onDatabaseChange(changes: DatabaseChange) {
+		if (changes.hasChange()) {
 			processChange();
 		}
 	}

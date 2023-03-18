@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { total } from '$core/database/balance/state.js';
 	import { amountFormat } from '$ui/formatters.js';
+	import ChartBar from '$ui/icons/ChartBar.svelte';
 	import Dashboard from '$ui/icons/dashboard.svelte';
 	import Hamburger from '$ui/icons/hamburger.svelte';
 	import TableCells from '$ui/icons/table-cells.svelte';
@@ -85,6 +86,10 @@
 			<SidebarItem bind:collapse link="/categories">
 				<Tag classes="w-6" slot="icon" />
 				Categories
+			</SidebarItem>
+			<SidebarItem bind:collapse link="/reports">
+				<ChartBar classes="w-6" slot="icon" />
+				Reports
 			</SidebarItem>
 			<div class="flex w-full flex-col items-center px-3">
 				<hr class="flex h-px w-full border-zinc-400" />
