@@ -53,7 +53,7 @@
 			<span class="pl-2 text-2xl">NALA</span>
 		</div>
 		{#if $total}
-			<div class="flex-grow text-center">Tot.: € {amountFormat($total?.toFixed(2))}</div>
+			<div class="flex-grow text-center">Tot.: € {amountFormat($total)}</div>
 		{/if}
 	</div>
 	<div class="flex items-center gap-3 justify-self-end pr-3">

@@ -2,5 +2,6 @@ export function amountFormat(x: number | string) {
 	if (x == null) {
 		return x;
 	}
-	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+	const fixed = Number(x).toFixed(2);
+	return fixed.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 }
