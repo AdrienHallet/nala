@@ -20,7 +20,9 @@
 	<Loading />
 {:else}
 	<div class="flex flex-row">
-		<div class="h-[calc(100vh-4rem)] w-full min-w-[400px] max-w-[450px] overflow-x-auto">
+		<div
+			class="h-[calc(100vh-4rem)] w-full min-w-[400px] grow overflow-x-auto sm:max-w-[450px] sm:pl-1"
+		>
 			<VirtualScroll items={$monthlyState} classes="">
 				<div
 					class="{MONTHLY_LAYOUT} sticky top-0 auto-rows-auto overflow-hidden border border-x-0 bg-gradient-to-r from-zinc-800 to-stone-800"
@@ -34,7 +36,7 @@
 				<MonthlyItem slot="row" let:item monthly={item} />
 			</VirtualScroll>
 		</div>
-		<div class="grow">
+		<div class="hidden grow sm:inline">
 			<Monthly monthlies={$monthlyState} />
 		</div>
 	</div>
