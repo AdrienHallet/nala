@@ -1,6 +1,6 @@
 import type { ChartConfiguration, ChartType } from 'chart.js';
 import colors from 'tailwindcss/colors';
-import type { Balance } from '../../../core/model/database/balance';
+import type { Balance } from '../../../core/model/stats/balance';
 
 export function balanceConfig(
 	balances: Balance[],

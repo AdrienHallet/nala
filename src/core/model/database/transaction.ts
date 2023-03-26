@@ -1,6 +1,6 @@
 export class Transaction {
 	id?: number;
-	date?: string;
+	date?: string; // YYYY-MM-DD
 	amount?: number; // CENT amount of the transaction
 	title?: string;
 	categoryId?: number;
@@ -19,4 +19,8 @@ export class Transaction {
 			this.categoryId === other.categoryId
 		);
 	}
+}
+
+export function getMonth(transaction: Transaction): string {
+	return transaction.date?.substring(0, 7) ?? '????-??';
 }

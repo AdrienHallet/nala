@@ -1,35 +1,55 @@
-import { derived, type Readable } from 'svelte/store';
-import { Balance } from '../../model/database/balance';
+import { derived, type Readable, writable, type Writable } from 'svelte/store';
+import { getMonth } from '../../model/database/transaction';
+import { Balance } from '../../model/stats/balance';
 import type { Transaction } from '../../model/database/transaction';
+import { Monthly } from '../../model/stats/monthly';
 import { transactions } from '../transaction/state';
 
-const dailyFn = (origin: Transaction[], set: (value: Balance[]) => void) => {
+const actuator = (origin: Transaction[], set: (value: Balance[]) => void) => {
 	if (!origin || origin.length < 1) {
 		set([]);
 		return;
 	}
 
-	const transactions = [...origin].sort((a, b) => (a.date || '').localeCompare(b.date || ''));
-	const accumulation: Balance[] = [];
-	let last: Balance = new Balance(transactions[0].date || '?', 0);
-	transactions.forEach((transaction) => {
-		if (last.date !== transaction.date) {
-			accumulation.push(last);
-			last = new Balance(transaction.date || '?', last.amount);
+	const orderedTransactions = [...origin].sort((a, b) =>
+		(a.date || '').localeCompare(b.date || ''),
+	);
+
+	const dailyBalances: Balance[] = [];
+	const monthlies: Monthly[] = [];
+	let totalAmount = 0;
+
+	let currentDay: Balance = new Balance(orderedTransactions[0].date || '?', 0);
+	let currentMonth: Monthly = new Monthly(getMonth(orderedTransactions[0]), 0, 0);
+	orderedTransactions.forEach((transaction) => {
+		if (currentDay.date !== transaction.date) {
+			dailyBalances.push(currentDay);
+			currentDay = new Balance(transaction.date || '?', currentDay.amount);
 		}
-		last.amount = Number(last.amount) + Number(transaction.amount || 0) / 100;
+		if (currentMonth.month !== getMonth(transaction)) {
+			monthlies.push(currentMonth);
+			currentMonth = new Monthly(getMonth(transaction), 0, 0);
+		}
+
+		const transactionAmount = Number(transaction.amount ?? 0) / 100;
+
+		currentDay.amount = Number(currentDay.amount) + transactionAmount;
+		if (transactionAmount < 0) {
+			currentMonth.expense += transactionAmount;
+		} else {
+			currentMonth.income += transactionAmount;
+		}
+		totalAmount += transactionAmount;
 	});
-	accumulation.push(last);
-	set(accumulation);
+	dailyBalances.push(currentDay);
+	monthlies.push(currentMonth);
+
+	total.set(totalAmount);
+	monthlyState.set(monthlies);
+	set(dailyBalances);
 };
 
-export const dailyState: Readable<Balance[]> = derived(transactions, dailyFn);
+export const dailyState: Readable<Balance[]> = derived(transactions, actuator);
+export const monthlyState: Writable<Monthly[]> = writable([]);
 
-export const total: Readable<number> = derived(
-	transactions,
-	(origin: Transaction[], set: (value: number) => void) => {
-		let accumulation = 0;
-		(origin ?? []).forEach((transaction) => (accumulation += Number(transaction.amount ?? 0)));
-		set(accumulation / 100);
-	},
-);
+export const total: Writable<number> = writable(0);

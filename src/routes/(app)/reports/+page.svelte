@@ -1,0 +1,43 @@
+<script lang="ts">
+	import { monthlyState } from '$core/database/balance/state.js';
+	import { loading } from '$core/loading/state.js';
+	import VirtualScroll from '$ui/components/virtual-scroll.svelte';
+	import Loading from '$ui/components/loading.svelte';
+	import Monthly from '$ui/graphs/monthly/Monthly.svelte';
+	import { dailyState } from '../../../core/database/balance/state';
+	import { getCategories } from '../../../core/database/category/operations';
+	import { getTransactions } from '../../../core/database/transaction/operations';
+	import { MONTHLY_LAYOUT } from './constants.js';
+	import MonthlyItem from './MonthlyItem.svelte';
+
+	getTransactions();
+	getCategories();
+
+	$dailyState;
+</script>
+
+{#if $loading.database || $loading.transactions || $loading.categories}
+	<Loading />
+{:else}
+	<div class="flex flex-row">
+		<div
+			class="h-[calc(100vh-4rem)] w-full min-w-[400px] grow overflow-x-auto sm:max-w-[450px] sm:pl-1"
+		>
+			<VirtualScroll items={$monthlyState} classes="">
+				<div
+					class="{MONTHLY_LAYOUT} sticky top-0 auto-rows-auto overflow-hidden border border-x-0 bg-gradient-to-r from-zinc-800 to-stone-800"
+					slot="header"
+				>
+					<div class="py-2 text-left">Month</div>
+					<div class="py-2 text-right">Incomes</div>
+					<div class="py-2 text-right">Expenses</div>
+					<div class="py-2 text-right">Spared</div>
+				</div>
+				<MonthlyItem slot="row" let:item monthly={item} />
+			</VirtualScroll>
+		</div>
+		<div class="hidden grow sm:inline">
+			<Monthly monthlies={$monthlyState} />
+		</div>
+	</div>
+{/if}
