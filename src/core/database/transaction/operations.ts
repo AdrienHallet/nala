@@ -11,6 +11,7 @@ import { setLoading } from '$core/loading/operations';
 import { LoadingComponent } from '$core/model/loading/component';
 
 let isInitialized = false;
+
 export async function getTransactions() {
 	setLoading(LoadingComponent.TRANSACTIONS, true);
 	if (!isInitialized) {
@@ -27,19 +28,22 @@ export const setTransactions = (toSet: Transaction[]) => {
 };
 
 export const addTransaction = (toAdd: Transaction) => {
-	prepend(transactions, toAdd);
-	addDBTransaction(toAdd);
-	transactionsChange.set(new Date());
+	addDBTransaction(toAdd).then(() => {
+		prepend(transactions, toAdd);
+		transactionsChange.set(new Date());
+	});
 };
 
 export const updateTransaction = (toUpdate: Transaction) => {
-	update(transactions, toUpdate);
-	updateDBTransaction(toUpdate);
-	transactionsChange.set(new Date());
+	updateDBTransaction(toUpdate).then(() => {
+		update(transactions, toUpdate);
+		transactionsChange.set(new Date());
+	});
 };
 
 export const deleteTransaction = (toDelete: Transaction) => {
-	remove(transactions, toDelete);
-	deleteDBTransaction(toDelete);
-	transactionsChange.set(new Date());
+	deleteDBTransaction(toDelete).then(() => {
+		remove(transactions, toDelete);
+		transactionsChange.set(new Date());
+	});
 };
