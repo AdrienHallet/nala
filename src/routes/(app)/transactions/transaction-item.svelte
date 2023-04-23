@@ -21,7 +21,7 @@
 	});
 
 	function onTransactionChange() {
-		if (!originalTransaction || originalTransaction.id != transaction.id) {
+		if (originalTransaction == undefined || originalTransaction.id != transaction.id) {
 			// Render of the component with a new transaction (might be first or n time)
 			originalTransaction = transaction;
 			amountDisplay = ((transaction.amount || 0) / 100).toFixed(2);

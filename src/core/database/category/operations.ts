@@ -23,19 +23,22 @@ export const setCategories = (toSet: Category[]) => {
 };
 
 export const addCategory = (toAdd: Category) => {
-	prepend(categories, toAdd);
-	addDBCategory(toAdd);
-	categoriesChange.set(new Date());
+	addDBCategory(toAdd).then(() => {
+		prepend(categories, toAdd);
+		categoriesChange.set(new Date());
+	});
 };
 
 export const updateCategory = (toUpdate: Category) => {
-	update(categories, toUpdate);
-	updateDBCategory(toUpdate);
-	categoriesChange.set(new Date());
+	updateDBCategory(toUpdate).then(() => {
+		update(categories, toUpdate);
+		categoriesChange.set(new Date());
+	});
 };
 
 export const deleteCategory = (toDelete: Category) => {
-	remove(categories, toDelete);
-	deleteDBCategory(toDelete);
-	categoriesChange.set(new Date());
+	deleteDBCategory(toDelete).then(() => {
+		remove(categories, toDelete);
+		categoriesChange.set(new Date());
+	});
 };
