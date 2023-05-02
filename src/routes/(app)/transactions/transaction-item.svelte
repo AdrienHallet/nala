@@ -8,12 +8,9 @@
 	import { TRANSACTIONS_LAYOUT } from './constants.js';
 
 	export let transaction: Transaction;
-	let originalTransaction: Transaction | undefined = undefined;
 	let amountDisplay = ((transaction.amount || 0) / 100).toFixed(2);
 	let component: Element;
 	let focused = false;
-
-	$: transaction, onTransactionChange();
 
 	onMount(() => {
 		component.addEventListener('focusin', () => (focused = true));
@@ -21,27 +18,22 @@
 	});
 
 	function onTransactionChange() {
-		if (!originalTransaction || originalTransaction.id != transaction.id) {
-			// Render of the component with a new transaction (might be first or n time)
-			originalTransaction = transaction;
-			amountDisplay = ((transaction.amount || 0) / 100).toFixed(2);
-			return;
-		}
-		transaction = Object.assign(new Transaction(), transaction);
-		if (!transaction.equals(originalTransaction)) {
-			// Transaction was updated and modified (sometimes update fired because of this bug: https://github.com/sveltejs/svelte/issues/5689)
-			updateTransaction(transaction);
-			originalTransaction = transaction;
-		}
+		updateTransaction(transaction);
 	}
 
 	function onAmountInput() {
 		transaction.amount = Math.round(parseFloat(amountDisplay || '0') * 100);
+		onTransactionChange();
 	}
 </script>
 
 <div bind:this={component} class={TRANSACTIONS_LAYOUT}>
-	<input type="date" class="ring-inset" bind:value={transaction.date} />
+	<input
+		type="date"
+		class="ring-inset"
+		bind:value={transaction.date}
+		on:input={onTransactionChange}
+	/>
 	<input class="hidden" bind:value={transaction.amount} step="any" type="number" />
 	<input
 		class="w-full bg-transparent text-right ring-inset"
@@ -52,13 +44,18 @@
 			(event.currentTarget.value = parseFloat(event.currentTarget.value || 0).toFixed(2))}
 		on:input={onAmountInput}
 	/>
-	<select class="ring-inset" bind:value={transaction.categoryId}>
+	<select class="ring-inset" bind:value={transaction.categoryId} on:input={onTransactionChange}>
 		<option value="" />
 		{#each $categories as category}
 			<option value={category.id}>{category.name}</option>
 		{/each}
 	</select>
-	<input type="text" class="ring-inset" bind:value={transaction.title} />
+	<input
+		type="text"
+		class="ring-inset"
+		bind:value={transaction.title}
+		on:input={onTransactionChange}
+	/>
 	<div
 		on:keyup={() => deleteTransaction(transaction)}
 		on:click={() => deleteTransaction(transaction)}
