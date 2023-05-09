@@ -8,9 +8,15 @@
 	import { TRANSACTIONS_LAYOUT } from './constants.js';
 
 	export let transaction: Transaction;
-	let amountDisplay = ((transaction.amount || 0) / 100).toFixed(2);
+	let amountDisplay;
 	let component: Element;
 	let focused = false;
+
+	$: transaction, updateDisplayAmount();
+
+	function updateDisplayAmount() {
+		amountDisplay = ((transaction.amount || 0) / 100).toFixed(2);
+	}
 
 	onMount(() => {
 		component.addEventListener('focusin', () => (focused = true));
