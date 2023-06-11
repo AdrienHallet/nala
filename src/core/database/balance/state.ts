@@ -24,7 +24,7 @@ const actuator = (origin: Transaction[], set: (value: Balance[]) => void) => {
 	orderedTransactions.forEach((transaction) => {
 		if (currentDay.date !== transaction.date) {
 			dailyBalances.push(currentDay);
-			currentDay = new Balance(transaction.date || '?', currentDay.amount);
+			currentDay = new Balance(transaction.date || '?', currentDay.amount || 0);
 		}
 		if (currentMonth.month !== getMonth(transaction)) {
 			monthlies.push(currentMonth);
