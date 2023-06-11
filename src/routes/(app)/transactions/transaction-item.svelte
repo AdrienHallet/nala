@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { categories } from '$core/database/category/state.js';
 	import { deleteTransaction } from '$core/database/transaction/operations.js';
+	import CurrencyInput from '$ui/components/CurrencyInput.svelte';
 	import Trash from '$ui/icons/Trash.svelte';
 	import { onMount } from 'svelte';
 	import { updateTransaction } from '../../../core/database/transaction/operations';
@@ -26,11 +27,6 @@
 	function onTransactionChange() {
 		updateTransaction(transaction);
 	}
-
-	function onAmountInput() {
-		transaction.amount = Math.round(parseFloat(amountDisplay || '0') * 100);
-		onTransactionChange();
-	}
 </script>
 
 <div bind:this={component} class={TRANSACTIONS_LAYOUT}>
@@ -40,16 +36,7 @@
 		bind:value={transaction.date}
 		on:input={onTransactionChange}
 	/>
-	<input class="hidden" bind:value={transaction.amount} step="any" type="number" />
-	<input
-		class="w-full bg-transparent text-right ring-inset"
-		bind:value={amountDisplay}
-		step="any"
-		type="number"
-		on:focusout={(event) =>
-			(event.currentTarget.value = parseFloat(event.currentTarget.value || 0).toFixed(2))}
-		on:input={onAmountInput}
-	/>
+	<CurrencyInput bind:value={transaction.amount} on:input={onTransactionChange} />
 	<select class="ring-inset" bind:value={transaction.categoryId} on:input={onTransactionChange}>
 		<option value="" />
 		{#each $categories as category}
