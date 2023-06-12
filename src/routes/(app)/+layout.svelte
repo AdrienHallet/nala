@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { total } from '$core/database/balance/state.js';
+	import { balanceReady, total } from '$core/database/balance/state.js';
 	import { amountFormat } from '$ui/formatters.js';
 	import ChartBar from '$ui/icons/ChartBar.svelte';
 	import Dashboard from '$ui/icons/dashboard.svelte';
@@ -29,7 +29,7 @@
 		? 'sm:grid-cols-[4rem_1fr_0rem]'
 		: 'sm:grid-cols-[16rem_1fr_16rem] md:grid-cols-[16rem_1fr_0rem]'}"
 >
-	<div on:click={toggleMenu} on:keypress={toggleMenu} class="relative flex items-center ">
+	<div on:click={toggleMenu} on:keypress={toggleMenu} class="relative flex items-center">
 		<div
 			class="invisible flex pl-3 transition-opacity delay-150 ease-in sm:visible {collapse
 				? 'opacity-0'
@@ -52,8 +52,8 @@
 			<Logo classes="h-6 my-auto" />
 			<span class="pl-2 text-2xl">NALA</span>
 		</div>
-		{#if $total}
-			<div class="flex-grow text-center">Tot.: € {amountFormat($total)}</div>
+		{#if $balanceReady}
+			<div class="flex-grow text-center">Balance: € {amountFormat($total)}</div>
 		{/if}
 	</div>
 	<div class="flex items-center gap-3 justify-self-end pr-3">

@@ -5,9 +5,9 @@ import type { Transaction } from '../../model/database/transaction';
 import { Monthly } from '../../model/stats/monthly';
 import { transactions } from '../transaction/state';
 
-const actuator = (origin: Transaction[], set: (value: Balance[]) => void) => {
+const actuator = (origin: Transaction[], set: (value: boolean) => void) => {
 	if (!origin || origin.length < 1) {
-		set([]);
+		set(false);
 		return;
 	}
 
@@ -44,12 +44,14 @@ const actuator = (origin: Transaction[], set: (value: Balance[]) => void) => {
 	dailyBalances.push(currentDay);
 	monthlies.push(currentMonth);
 
-	total.set(totalAmount);
+	dailyState.set(dailyBalances);
 	monthlyState.set(monthlies);
-	set(dailyBalances);
+	total.set(totalAmount);
+	set(true);
 };
+export const balanceReady: Readable<boolean> = derived(transactions, actuator);
 
-export const dailyState: Readable<Balance[]> = derived(transactions, actuator);
+export const dailyState: Writable<Balance[]> = writable([]);
 export const monthlyState: Writable<Monthly[]> = writable([]);
 
 export const total: Writable<number> = writable(0);
