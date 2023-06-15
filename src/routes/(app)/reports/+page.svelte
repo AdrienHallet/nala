@@ -1,10 +1,8 @@
 <script lang="ts">
 	import { monthlyState } from '$core/database/balance/state.js';
-	import { categories } from '$core/database/category/state';
 	import { loading } from '$core/loading/state.js';
 	import VirtualScroll from '$ui/components/virtual-scroll.svelte';
 	import Loading from '$ui/components/loading.svelte';
-	import Monthly from '$ui/graphs/monthly/Monthly.svelte';
 	import { dailyState } from '../../../core/database/balance/state';
 	import { getCategories } from '../../../core/database/category/operations';
 	import { getTransactions } from '../../../core/database/transaction/operations';
@@ -22,7 +20,7 @@
 {:else}
 	<div class="flex flex-row">
 		<div class="w-full break-words rounded text-zinc-200">
-			<div class="rounded-t border-0 px-4 py-3">
+			<div class="rounded-t border-0 px-4 py-2">
 				<div class="flex flex-wrap items-center">
 					<div class="relative w-full max-w-full flex-1 flex-grow px-4">
 						<h3 class="text-lg font-semibold">Reports</h3>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { categories } from '$core/database/category/state.js';
 	import { loading } from '$core/loading/state.js';
+	import Button from '$ui/components/Button.svelte';
 	import Loading from '$ui/components/loading.svelte';
 	import VirtualScroll from '$ui/components/virtual-scroll.svelte';
 	import CategoryItem from './category-item.svelte';
@@ -19,10 +20,13 @@
 	<Loading />
 {:else}
 	<div class="w-full break-words rounded text-zinc-200">
-		<div class="rounded-t border-0 px-4 py-3">
+		<div class="rounded-t border-0 px-4 py-2">
 			<div class="flex flex-wrap items-center">
 				<div class="relative w-full max-w-full flex-1 flex-grow px-4">
 					<h3 class="text-lg font-semibold">Categories ({$categories?.length})</h3>
+				</div>
+				<div class="px-4">
+					<Button on:click={onAddClick}>Add</Button>
 				</div>
 			</div>
 		</div>
@@ -34,9 +38,6 @@
 				>
 					<div class="py-2 text-left">Name</div>
 					<div class="py-2 text-left">Description</div>
-					<div class="py-2 text-left">
-						<button on:click={onAddClick} class="px-2">Add</button>
-					</div>
 				</div>
 				<CategoryItem slot="row" let:item category={item} />
 			</VirtualScroll>

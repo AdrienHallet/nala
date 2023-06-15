@@ -1,7 +1,7 @@
 <script>
 	import { signIn } from '@auth/sveltekit/client';
 	import Logo from '$ui/icons/logo.svelte';
-	import Button from '$ui/components/button.svelte';
+	import GithubButton from '$ui/components/GithubButton.svelte';
 	import Github from '$ui/icons/github.svelte';
 
 	let isLoggingIn = false;
@@ -16,12 +16,13 @@
 		</div>
 		<hr class="mx-3 border-zinc-700" />
 		<div class="flex content-center justify-center">
-			<Button
+			<GithubButton
+				lg
 				on:click={() => {
 					isLoggingIn = true;
 					signIn('github').then(
 						() => {}, // Github will auto-redirect on success
-						() => (isLoggingIn = false)
+						() => (isLoggingIn = false),
 					);
 				}}
 				disabled={isLoggingIn}
@@ -29,7 +30,7 @@
 			>
 				<Github slot="icon" classes="h-6" />
 				Continue with GitHub
-			</Button>
+			</GithubButton>
 		</div>
 	</div>
 </div>

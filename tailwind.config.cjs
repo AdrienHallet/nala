@@ -16,6 +16,11 @@ module.exports = {
 			}
 		}
 	},
+	variants: {
+		extend: {
+			backgroundColor: ['active']
+		},
+	},
 	plugins: [],
 	future: {
 		// Disables hover on mobile, so we aren't stuck with hover style on touch

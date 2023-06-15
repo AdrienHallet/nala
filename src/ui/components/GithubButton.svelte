@@ -1,24 +1,26 @@
 <script lang="ts">
 	export let disabled = false;
 	export let loading = false;
-	let activeColors = '';
+	export let lg = false;
+	let dynamicClasses = '';
 
 	$: disabled, refreshStyle();
 
 	const refreshStyle = () => {
-		activeColors = 'bg-zinc-500 text-white ';
+		dynamicClasses = ' ';
 		if (disabled) {
-			activeColors += 'opacity-75';
+			dynamicClasses += 'opacity-75';
 		} else {
-			activeColors += 'hover:bg-zinc-700 active:bg-zinc-800';
+			dynamicClasses += 'hover:bg-zinc-700 active:bg-zinc-800';
 		}
 	};
 </script>
 
 <button
 	on:click
-	class="relative flex gap-3 rounded  py-2 px-4 font-bold {activeColors}"
+	class="relative flex gap-3 rounded bg-zinc-500 px-4 font-bold text-white {dynamicClasses}"
 	class:cursor-not-allowed={disabled}
+	class:py-2={lg}
 	{disabled}
 >
 	<slot name="icon" />
