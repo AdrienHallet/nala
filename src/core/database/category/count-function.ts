@@ -14,13 +14,11 @@ export function categoryCountFn(
 	}
 	const categoryCountMap = new Map<number | undefined, number>();
 	transactions.forEach((transaction) => {
-		if (!categoryCountMap.has(transaction.categoryId as number)) {
-			categoryCountMap.set(transaction.categoryId, 0);
+		const reference = (transaction.categoryId || undefined) as number;
+		if (!categoryCountMap.has(reference)) {
+			categoryCountMap.set(reference, 0);
 		}
-		categoryCountMap.set(
-			transaction.categoryId,
-			(categoryCountMap.get(transaction.categoryId) as number) + 1,
-		);
+		categoryCountMap.set(reference, (categoryCountMap.get(reference) as number) + 1);
 	});
 	const categoryCounts = Array.from(categoryCountMap, ([id, count]) => ({
 		category: categories.find((cat) => cat.id === id),

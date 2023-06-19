@@ -29,7 +29,7 @@
 		? 'sm:grid-cols-[4rem_1fr_0rem]'
 		: 'sm:grid-cols-[16rem_1fr_16rem] md:grid-cols-[16rem_1fr_0rem]'}"
 >
-	<div on:click={toggleMenu} on:keypress={toggleMenu} class="relative flex items-center">
+	<div class="relative flex items-center">
 		<div
 			class="invisible flex pl-3 transition-opacity delay-150 ease-in sm:visible {collapse
 				? 'opacity-0'
@@ -38,10 +38,12 @@
 			<Logo classes="h-6 my-auto" />
 			<span class="pl-2 text-2xl">NALA</span>
 		</div>
-		<Hamburger
-			classes="h-6 top-5 absolute flex-grow right-5 hover:cursor-pointer hover:text-zinc-600"
-			bind:collapsed={collapse}
-		/>
+		<div on:click={toggleMenu} on:keypress={toggleMenu}>
+			<Hamburger
+				classes="h-6 top-5 absolute flex-grow right-5 hover:cursor-pointer hover:text-zinc-600"
+				bind:collapsed={collapse}
+			/>
+		</div>
 	</div>
 	<div class="flex items-center">
 		<div

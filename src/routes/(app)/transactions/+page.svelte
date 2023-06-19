@@ -27,6 +27,7 @@
 				<div class="relative w-full max-w-full flex-1 flex-grow px-4">
 					<h3 class="text-lg font-semibold">Transactions ({$transactions?.length})</h3>
 				</div>
+
 				<div class="px-4">
 					<Button on:click={onAddClick}>Add</Button>
 				</div>

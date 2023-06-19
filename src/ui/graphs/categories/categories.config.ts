@@ -8,7 +8,7 @@ export function categoryCountConfig(
 	return {
 		type: 'doughnut',
 		data: {
-			labels: categoryCounts.map((categoryCount) => categoryCount.category?.name || '?'),
+			labels: categoryCounts.map((categoryCount) => categoryCount.category?.name || 'No category'),
 			datasets: [
 				{
 					data: categoryCounts.map((categoryCount) => categoryCount.count || 0),
